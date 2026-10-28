@@ -1,0 +1,98 @@
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+html, body { min-height: 100%; }
+body {
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  color: #fff;
+  background: linear-gradient(#000 0%, #000 60%, #2c2838 100%) no-repeat #000;
+  padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right);
+}
+
+header { height: 16vh; height: 16svh; min-height: 80px; display: flex; align-items: center; justify-content: center; padding-top: env(safe-area-inset-top); }
+h1 { font-weight: 500; font-size: clamp(1.25rem, 3.2vw, 2.2rem); letter-spacing: .3px; text-align: center; padding: 0 12px; }
+
+/* ---------- scene ---------- */
+.scene { position: relative; width: 100%; max-width: 1200px; margin: 0 auto; aspect-ratio: 16 / 9; overflow: hidden; background: #000; }
+.scene:fullscreen, .scene:-webkit-full-screen { max-width: none; width: 100vw; height: 100vh; aspect-ratio: auto; }
+.stage { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: block; pointer-events: none; }
+
+.scroller { position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 3; overflow-y: scroll; overflow-x: hidden;
+            overscroll-behavior: contain; -webkit-overflow-scrolling: touch; touch-action: pan-y;
+            scrollbar-width: none; -ms-overflow-style: none; }
+.scroller::-webkit-scrollbar { display: none; }
+.scrollElement { height: 800%; }
+
+/* custom cyan scroll thumb: identical on every device */
+.track { position: absolute; top: 0; right: 0; bottom: 0; width: 6px; z-index: 4; background: rgba(60, 60, 60, .6); pointer-events: none; }
+.thumb { position: absolute; top: 0; left: 0; width: 100%; height: 12.5%; background: #00e5ff; border-radius: 3px; display: block; }
+
+/* ---------- hints ---------- */
+.hint { position: absolute; left: 0; right: 0; z-index: 4; display: flex; flex-direction: column; align-items: center; gap: 6px;
+        pointer-events: none; font-family: "Myriad Pro", "Segoe UI", sans-serif; font-size: clamp(1rem, 4vw, 1.7rem);
+        text-shadow: 0 2px 10px rgba(0, 0, 0, .45); }
+.hint.down { top: 60%; }
+.hint.back { top: 60%; opacity: 0; }
+.chev { display: block; width: 14px; height: 14px; border: solid #fff; border-width: 2px 0 0 2px; }
+.chev.up { transform: rotate(45deg); margin-bottom: 4px; }
+.chev.dn { transform: rotate(225deg); }
+
+/* ---------- buttons ---------- */
+.controls { position: absolute; left: 10px; right: 16px; bottom: 10px; z-index: 5; display: flex; justify-content: space-between; align-items: center; gap: 6px; pointer-events: none; }
+.btn { pointer-events: auto; white-space: nowrap; font-size: 11px; color: #fff; background: rgba(0, 0, 0, .65);
+       border: 1px solid #fff; border-radius: 3px; padding: 6px 10px; cursor: pointer; font-family: inherit; }
+.btn:hover { background: #fff; color: #000; }
+
+/* ---------- code window ---------- */
+.code { width: 100%; max-width: 1000px; margin: 0 auto; padding: 36px 14px 80px; --ln: 28px; }
+.win { background: #1b1b1b; border-radius: 8px; overflow: hidden; }
+.bar { display: flex; align-items: center; gap: 8px; padding: 12px 14px 4px; }
+.dot { width: 12px; height: 12px; border-radius: 50%; display: block; }
+.dot.r { background: #ff5f57; } .dot.y { background: #febc2e; } .dot.g { background: #28c840; }
+.by { margin-left: auto; color: #b8962e; font-size: 13px; }
+pre { padding: 10px 14px 16px; font-family: "Fira Code", "JetBrains Mono", Consolas, Menlo, monospace; font-size: 12.5px; line-height: 1.75; white-space: pre-wrap; overflow-wrap: anywhere; }
+pre .ln { display: inline-block; width: var(--ln); color: #777; user-select: none; -webkit-user-select: none; vertical-align: top; }
+pre .c { display: inline-block; width: calc(100% - var(--ln) - 4px); vertical-align: top; color: #d4d4d4; }
+.fn { color: #dcdcaa; } .key { color: #9cdcfe; } .str { color: #ce9178; } .num { color: #b5cea8; } .kw { color: #569cd6; }
+
+/* ---------- footer ---------- */
+footer { text-align: center; padding: 28px 16px calc(36px + env(safe-area-inset-bottom)); border-top: 1px solid rgba(255, 255, 255, .08); background: #1f1c29; color: #b9b6c6; }
+footer p { font-size: 15px; margin-bottom: 6px; line-height: 1.5; }
+footer a { color: #fff; font-weight: 600; text-decoration: none; border-bottom: 1px solid #00e5ff; padding-bottom: 1px; white-space: nowrap; }
+footer a:hover { color: #00e5ff; }
+footer small { font-size: 12px; color: #8a8799; }
+
+/* ======================= RESPONSIVE ======================= */
+
+/* touch screens: comfortable tap targets */
+@media (pointer: coarse) {
+  .btn { min-height: 38px; padding: 8px 12px; font-size: 12px; }
+}
+
+/* phones & small tablets in portrait: taller scene so it fills the screen nicely */
+@media (max-width: 900px) and (orientation: portrait) {
+  .scene { aspect-ratio: auto; height: min(70vh, 135vw); height: min(70svh, 135vw); }
+}
+
+/* small phones */
+@media (max-width: 480px) {
+  .code { padding: 24px 10px 56px; --ln: 22px; }
+  pre { font-size: 11px; padding: 8px 10px 14px; }
+  .by { font-size: 12px; }
+  footer p { font-size: 14px; }
+}
+@media (max-width: 360px) {
+  .controls { left: 6px; right: 12px; gap: 4px; }
+  .btn { font-size: 10px; padding: 7px 7px; }
+  pre { font-size: 10.5px; }
+}
+
+/* phones in landscape: scene fills the short screen */
+@media (orientation: landscape) and (max-height: 520px) {
+  header { height: 44px; min-height: 0; }
+  h1 { font-size: 1rem; }
+  .scene { aspect-ratio: auto; max-width: none; height: calc(100vh - 44px); height: calc(100svh - 44px); }
+  .hint { font-size: 1rem; }
+}
+
+/* respect "reduce motion" */
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }

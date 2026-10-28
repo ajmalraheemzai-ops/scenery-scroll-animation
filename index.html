@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#000000">
+<title>Scenery Animation</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<style>
+  header {
+    
+  }
+
+  header h1 {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    font-size: clamp(20px, 3vw, 34px);
+    font-weight: 700;
+    line-height: 1.5;
+  }
+
+  header h1 .credit {
+    color: #facc15;
+  }
+
+  @media (max-width: 600px) {
+    header {
+      padding: 18px 10px;
+    }
+  }
+</style>
+
+<header>
+  <h1>
+    <span>Scenery Animation</span>
+    <span class="credit"> | Designed &amp; Developed by Ajmal Abdulrahimzai</span>
+  </h1>
+</header>
+<main>
+  <section class="scene" id="scene">
+
+    <svg class="stage" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+      <defs>
+        <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop id="s1" offset="0" stop-color="#fbd3b8"/>
+          <stop id="s2" offset="1" stop-color="#fdb596"/>
+        </linearGradient>
+        <radialGradient id="sunGrad"><stop offset="0" stop-color="#fff200"/><stop offset=".88" stop-color="#ffee00"/><stop offset="1" stop-color="#fff7b0"/></radialGradient>
+        <radialGradient id="glowGrad"><stop offset="0" stop-color="#ffe678" stop-opacity=".95"/><stop offset=".25" stop-color="#ffaa6e" stop-opacity=".6"/><stop offset="1" stop-color="#ff8c78" stop-opacity="0"/></radialGradient>
+        <radialGradient id="nightGlow" cx=".5" cy="1" r=".75"><stop offset="0" stop-color="#9b3dff" stop-opacity=".95"/><stop offset=".5" stop-color="#5a1fd0" stop-opacity=".6"/><stop offset="1" stop-color="#1a0a5c" stop-opacity="0"/></radialGradient>
+        <linearGradient id="pinkGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e4577d"/><stop offset="1" stop-color="#9a3f8c"/></linearGradient>
+        <linearGradient id="purpleGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7a43a0"/><stop offset="1" stop-color="#3e2a86"/></linearGradient>
+        <linearGradient id="blueGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3038a0"/><stop offset="1" stop-color="#1e2270"/></linearGradient>
+        <linearGradient id="nightGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e91e63"/><stop offset="1" stop-color="#4a148c"/></linearGradient>
+      </defs>
+
+      <rect width="1600" height="900" fill="url(#skyGrad)"/>
+      <rect id="nightGlowRect" width="1600" height="900" fill="url(#nightGlow)" opacity="0"/>
+      <g id="stars" opacity="0"></g>
+      <g id="shoot" opacity="0"><line x1="0" y1="0" x2="170" y2="-55" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".7"/><circle r="4" fill="#fff"/></g>
+
+      <g transform="translate(800 0)"><g id="sun">
+        <circle r="300" fill="url(#glowGrad)"/>
+        <circle r="58" fill="url(#sunGrad)"/>
+      </g></g>
+
+      <g id="clouds" fill="#fff" opacity="0"></g>
+      <g id="flock" fill="none" stroke="#0d0a3a" stroke-width="3" stroke-linecap="round" opacity="0"></g>
+      <g transform="translate(250 780)"><path id="bird" fill="#0d0a3a" d="M0 0 C10 -8 22 -10 34 -4 C46 -10 58 -8 68 0 C58 -2 50 2 44 8 L34 4 L24 8 C18 2 10 -2 0 0Z"/></g>
+
+      <path id="rangePink" fill="url(#pinkGrad)" d="M0 520 L140 430 L260 500 L420 380 L560 470 L700 400 L860 520 L1020 360 L1180 480 L1340 410 L1500 500 L1600 450 L1600 900 L0 900Z"/>
+      <path id="rangePurple" fill="url(#purpleGrad)" d="M0 600 L180 520 L360 590 L520 500 L700 600 L900 530 L1100 610 L1300 520 L1480 600 L1600 560 L1600 900 L0 900Z"/>
+      <path id="hillBlue" fill="url(#blueGrad)" d="M0 700 Q300 560 560 640 T1000 600 Q1300 560 1600 680 L1600 900 L0 900Z"/>
+      <path id="hillNavy" fill="#14126a" d="M0 780 Q400 700 800 760 T1600 740 L1600 900 L0 900Z"/>
+      <path id="nightRange" fill="url(#nightGrad)" d="M0 700 L150 640 L300 700 L450 620 L620 710 L800 650 L980 720 L1150 630 L1320 710 L1480 640 L1600 700 L1600 900 L0 900Z"/>
+      <path id="nightFront" fill="#000" d="M0 780 L200 720 L420 790 L650 740 L900 800 L1150 735 L1400 795 L1600 750 L1600 900 L0 900Z"/>
+
+      <path id="forest" fill="#0c0a3a"/>
+      <g id="hillDarkG"><path fill="#080535" d="M0 820 Q500 740 800 800 T1600 790 L1600 900 L0 900Z"/><path id="crestTrees" fill="#080535"/></g>
+      <g id="edgeL"><g id="scaleL"><path id="bigL" fill="#080535"/></g></g>
+      <g id="edgeR"><g id="scaleR"><path id="bigR" fill="#080535"/></g></g>
+    </svg>
+
+    <div class="hint down" id="hintDown"><span>Scroll Down</span><i class="chev dn"></i></div>
+    <div class="hint back" id="hintBack"><i class="chev up"></i><span>Scroll Back</span></div>
+
+    <div class="controls">
+      <button class="btn" id="works">My Works</button>
+      <button class="btn" id="auto">❚❚ Auto Motion</button>
+      <button class="btn" id="full">Go Fullscreen</button>
+    </div>
+
+    <div class="track" aria-hidden="true"><i class="thumb"></i></div>
+    <div class="scroller"><div class="scrollElement"></div></div>
+  </section>
+
+  <section class="code">
+    <div class="win">
+      <div class="bar"><i class="dot r"></i><i class="dot y"></i><i class="dot g"></i><span class="by">Code by meowish</span></div>
+<pre><span class="ln">1</span><span class="c"><span class="fn">gsap</span>.<span class="fn">fromTo</span>(<span class="str">"#bird"</span>, { <span class="key">opacity</span>: <span class="num">1</span> }, {</span>
+<span class="ln">2</span><span class="c">    <span class="key">y</span>: <span class="num">-250</span>,</span>
+<span class="ln">3</span><span class="c">    <span class="key">x</span>: <span class="num">800</span>,</span>
+<span class="ln">4</span><span class="c">    <span class="key">ease</span>: <span class="str">"power2.out"</span>,</span>
+<span class="ln">5</span><span class="c">    <span class="key">scrollTrigger</span>: {</span>
+<span class="ln">6</span><span class="c">        <span class="key">trigger</span>: <span class="str">".scrollElement"</span>,</span>
+<span class="ln">7</span><span class="c">        <span class="key">start</span>: <span class="str">"15% top"</span>,</span>
+<span class="ln">8</span><span class="c">        <span class="key">end</span>: <span class="str">"60% 100%"</span>,</span>
+<span class="ln">9</span><span class="c">        <span class="key">scrub</span>: <span class="num">4</span>,</span>
+<span class="ln">10</span><span class="c">        <span class="key">onEnter</span>: <span class="kw">function</span>() { <span class="fn">gsap</span>.<span class="fn">to</span>(<span class="str">"#bird"</span>, { <span class="key">scaleX</span>: <span class="num">1</span>, <span class="key">rotation</span>: <span class="num">0</span> }) },</span>
+<span class="ln">11</span><span class="c">        <span class="key">onLeave</span>: <span class="kw">function</span>() { <span class="fn">gsap</span>.<span class="fn">to</span>(<span class="str">"#bird"</span>, { <span class="key">scaleX</span>: <span class="num">-1</span>, <span class="key">rotation</span>: <span class="num">-15</span> }) },</span>
+<span class="ln">12</span><span class="c">    }</span>
+<span class="ln">13</span><span class="c">})</span></pre>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>2026 | Developed by
+    <a href="https://github.com/ajmalraheemzai-ops?tab=repositories" target="_blank" rel="noopener">Ajmal Abdulrahimzai</a></p>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
